@@ -12,7 +12,7 @@ import tk.mybatis.mapper.common.Mapper;
 @org.apache.ibatis.annotations.Mapper
 public interface ${model}Dao extends Mapper<${model}>{
 
-   // int insert(${model} ${model?uncap_first});
+   int insert(${model} ${model?uncap_first});
 
   //  int delete(${model} ${model?uncap_first});
 
