@@ -26,6 +26,27 @@
         </#if>
     </#list>
     </sql>
+    
+      <insert id="insert">
+    	<selectKey keyProperty="${pkField}" resultType="string" order="BEFORE">    
+	            select uuid() as id from dual  
+	    </selectKey> 
+        insert into `${table}`
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+        <#list fields as f>
+            <if test="${f.field} != null">
+                `${f.field_}`,
+            </if>
+        </#list>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+        <#list fields as f>
+            <if test="${f.field} != null">
+            ${r'#{'}${f.field}${r'}'} ,
+            </if>
+        </#list>
+        </trim>
+    </insert>
 
 
 
