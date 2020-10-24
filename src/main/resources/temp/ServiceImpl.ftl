@@ -66,7 +66,7 @@ public class ${model}ServiceImpl implements ${model}Service {
         return entity;
     }
     
-    public Object list(ParamObject<SysCodeType> paramObject) throws Exception{
+    public Object list(ParamObject<${model}> paramObject) throws Exception{
     	BeanUtil.buildEntity(${model}.class, paramObject);
         return 	${model?uncap_first}Dao.select(paramObject.getEntity());
     }
