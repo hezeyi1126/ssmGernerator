@@ -65,6 +65,11 @@ public class ${model}ServiceImpl implements ${model}Service {
     	paramObject.setMsg(  "保存成功");
         return entity;
     }
+    
+    public Object list(ParamObject<SysCodeType> paramObject) throws Exception{
+    	BeanUtil.buildEntity(SysCodeType.class, paramObject);
+        return 	${model?uncap_first}Dao.select(paramObject.getEntity());
+    }
 
 
 
