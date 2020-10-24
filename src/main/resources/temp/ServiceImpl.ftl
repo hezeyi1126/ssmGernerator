@@ -71,6 +71,19 @@ public class ${model}ServiceImpl implements ${model}Service {
 
     @Autowired
     private ${model}Dao ${model?uncap_first}Dao;
+    
+     @Override
+    public ${model} getById(String id){
+        return ${model?uncap_first}Dao.getById(id);
+    }
+    
+        @Override
+    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+    public int deleteByIds(String[] ids) {
+        return  ${model?uncap_first}Dao.deleteByIds(ids);
+    }
+    
+    
 /*
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -84,11 +97,7 @@ public class ${model}ServiceImpl implements ${model}Service {
         return ${model?uncap_first}Dao.delete(${model?uncap_first});
     }
 
-    @Override
-    @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-    public int deleteByIds(String[] ids) {
-        return  ${model?uncap_first}Dao.deleteByIds(ids);
-    }
+
 
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
@@ -96,10 +105,7 @@ public class ${model}ServiceImpl implements ${model}Service {
         return ${model?uncap_first}Dao.updateByPrimaryKey(${model?uncap_first});
     }
 
-    @Override
-    public ${model} getById(String id){
-        return ${model?uncap_first}Dao.getById(id);
-    }
+   
 
     @Override
     public List<${model}> list(${model} ${model?uncap_first}){
