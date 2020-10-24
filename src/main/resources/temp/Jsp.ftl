@@ -229,6 +229,16 @@
 			initTable(params);
 		}
 		
+		//填充表单
+		 window.fillForm =function (obj){
+		 var eform = $("#editform");
+			for(var name in obj){
+			//$("input")
+				eform.find("[name='"+ name +"']").val(obj[name]);
+			}
+			form.render();
+		}
+		
 		//监听提交
 		form.on('submit(subform)', function(data) {
 			 var loadindex = layer.load(loadingtype);
@@ -361,12 +371,6 @@
 		$("#editform input,select,textarea").val("");
 	}
 	
-	function fillForm(obj){
-		for(var name in obj){
-		//$("input")
-			$("#editform").find("[name='"+ name +"']").val(obj[name]);
-		}
-	}
 
 	/*编辑*/
 	function edit( id) {
