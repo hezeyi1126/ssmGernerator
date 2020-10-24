@@ -109,7 +109,7 @@ public class ${model}ServiceImpl implements ${model}Service {
 
     @Override
     public List<${model}> list(${model} ${model?uncap_first}){
-        return ${model?uncap_first}Dao.list(${model?uncap_first});
+        return ${model?uncap_first}Dao.select(${model?uncap_first});
     }
     
     /**
