@@ -71,7 +71,7 @@ public class ${model}ServiceImpl implements ${model}Service {
 
     @Autowired
     private ${model}Dao ${model?uncap_first}Dao;
-
+/*
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int insert(${model} ${model?uncap_first}){
@@ -104,7 +104,7 @@ public class ${model}ServiceImpl implements ${model}Service {
     @Override
     public List<${model}> list(${model} ${model?uncap_first}){
         return ${model?uncap_first}Dao.list(${model?uncap_first});
-    }
+    }*/
     
     /**
     *getter and setter
