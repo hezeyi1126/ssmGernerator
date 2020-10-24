@@ -27,16 +27,7 @@
     </#list>
     </sql>
 
-    <delete id="delete">
-        delete from `${table}`
-        <trim prefix="where " prefixOverrides="and ">
-        <#list fields as f>
-            <if test="${f.field} != null">
-                and `${f.field_}` = ${r'#{'}${f.field}${r'}'}
-            </if>
-        </#list>
-        </trim>
-    </delete>
+
 
     <delete id="deleteByIds">
         delete from `${table}`
@@ -46,19 +37,7 @@
         </foreach>
     </delete>
 
-    <update id="update">
-        update `${table}`
-        <set>
-        <#list fields as f>
-            <#if (f_index > 0)>
-                <if test="${f.field} != null">
-                    `${f.field_}` = ${r'#{'}${f.field}${r'}'},
-                </if>
-            </#if>
-        </#list>
-        </set>
-        where `${pk}` = ${r'#{'}${pkField}${r'}'}
-    </update>
+    
 
     <select id="getById" resultMap="${model?lower_case}">
         select
@@ -67,16 +46,5 @@
         where `${pk}` =  ${r'#{id}'}
     </select>
 
-    <select id="list" resultMap="${model?lower_case}">
-        select
-        <include refid="columns" />
-        from `${table}`
-        <trim prefix="where " prefixOverrides="and ">
-        <#list fields as f>
-            <if test="${f.field} != null">
-                and `${f.field_}` = ${r'#{'}${f.field}${r'}'}
-            </if>
-        </#list>
-        </trim>
-    </select>
+    
 </mapper>
