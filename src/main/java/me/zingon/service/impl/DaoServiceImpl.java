@@ -49,6 +49,7 @@ public class DaoServiceImpl implements DaoService {
             root.put("table",table);
             root.put("fields", Maps.getFields(table)); 
             root.put("pk", Maps.getPK(table));
+            root.put("pkField", MyUtil.a_b2aB(Maps.getPK(table)) );
             cs.write2File(root, "Mapper.ftl", new File(path + File.separator + MyUtil.a_b2AB(table) + "Mapper.xml"));
         }
     }
@@ -61,6 +62,7 @@ public class DaoServiceImpl implements DaoService {
         root.put("table",table);
         root.put("fields", Maps.getFields(table));
         root.put("pk", Maps.getPK(table));
+        root.put("pkField", MyUtil.a_b2aB(Maps.getPK(table)) );
         cs.write2File(root, "Mapper.ftl", new File(path + File.separator + MyUtil.a_b2AB(table) + "Mapper.xml"));
     }
 }

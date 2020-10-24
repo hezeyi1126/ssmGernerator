@@ -37,6 +37,7 @@ public class ModelServiceImpl implements ModelService {
     public int createModel(String table) throws IOException, TemplateException {
         String path = MyUtil.mkDir("entity");
         Map<String, Object> root = new HashMap<String, Object>();
+        root.put("table", table);
         root.put("model", MyUtil.a_b2AB(table));
         root.put("fields", Maps.getFields(table));
         cs.write2File(root, "Model.ftl", new File(path + File.separator + MyUtil.a_b2AB(table) + ".java"));

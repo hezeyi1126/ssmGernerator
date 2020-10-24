@@ -39,7 +39,7 @@ public class ${model}ServiceImpl implements ${model}Service {
     	return null;
     }
     
-   @CacheEvict(value = "${model?uncap_first}", key = "#p0.id")
+  // @CacheEvict(value = "${model?uncap_first}", key = "#p0.id")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Object del(ParamObject<${model}> paramObject ) throws Exception{
     	BeanUtil.buildEntity(${model}.class, paramObject);
@@ -49,14 +49,14 @@ public class ${model}ServiceImpl implements ${model}Service {
     }
     
     
-    @Cacheable(value = "${model?uncap_first}", key = "#p0.id")
+    //@Cacheable(value = "${model?uncap_first}", key = "#p0.id")
     public Object getBId(ParamObject<${model}> paramObject) throws Exception{
     	BeanUtil.buildEntity(${model}.class, paramObject);
-        return  ${model?uncap_first}Dao.getById(paramObject.getId());
+        return  ${model?uncap_first}Dao.selectOne(paramObject.getEntity());
     }
     
     
-    @CachePut(value = "${model?uncap_first}", key = "#p0.id")
+   // @CachePut(value = "${model?uncap_first}", key = "#p0.id")
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public Object edit(ParamObject<${model}> paramObject ) throws Exception{
     	BeanUtil.buildEntity(${model}.class, paramObject);

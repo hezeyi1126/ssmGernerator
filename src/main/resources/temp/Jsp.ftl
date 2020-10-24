@@ -77,8 +77,8 @@
 	                    </script>
 
 						<script type="text/html" id="editpane">
-									<i class="layui-icon layui-icon-edit" onclick="edit('{{d.id}}')"  style="font-size: 18px; color: #1E9FFF;"></i>  
-									<i class="layui-icon layui-icon-delete" onclick="del('{{d.id}}')" style="font-size: 18px; color: #1E9FFF;"></i>  
+									<i class="layui-icon layui-icon-edit" onclick="edit('{{d.${pkField}}}')"  style="font-size: 18px; color: #1E9FFF;"></i>  
+									<i class="layui-icon layui-icon-delete" onclick="del('{{d.${pkField}}}')" style="font-size: 18px; color: #1E9FFF;"></i>  
 						</script>
 
 					</div>
@@ -371,7 +371,7 @@
 	/*编辑*/
 	function edit( id) {
 		 var loadindex = layer.load(loadingtype);
-		pro.callServer(service, "getBId",{id : id},function(res){
+		pro.callServer(service, "getBId",{${pkField} : id},function(res){
 			layer.close(loadindex);
 			
 			if(res.data.state == '1'){
@@ -392,7 +392,7 @@
 		}, function(index) {
 			//发异步删除数据
 			 var loadindex = layer.load(loadingtype);
-			pro.callServer(service, "del",{id : id},function(res){
+			pro.callServer(service, "del",{${pkField} : id},function(res){
 				layer.close(loadindex);
 				layer.msg(res.data.msg);
 				if(res.data.state == '1'){
@@ -411,7 +411,7 @@
 	function delSelected(data){
 		var ids = "";
 		for(var i = 0 ;i < data.length;i++){
-			ids += data[i].id + ",";
+			ids += data[i].${pkField} + ",";
 		}
 		ids = ids.substring(0 , ids.length - 1);
 		layer.confirm('是否确认删除当前项目？', {

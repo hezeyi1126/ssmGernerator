@@ -7,11 +7,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 
 /**
 * Created by hbm Generator<27683139@qq.com> on ${now?date}.
 */
+@Table(name = "${table}")
 public class ${model} implements Serializable {
     <#list fields as f>
         /**
@@ -20,6 +22,7 @@ public class ${model} implements Serializable {
          <#if f.key=='PRI'>
          @Id
    		 @GeneratedValue(generator = "UUID")
+   		 @Column(name="${f.field_}")
          private ${f.type} ${f.field}; 
          <#else>
          	 <#if f.type == 'Date'>

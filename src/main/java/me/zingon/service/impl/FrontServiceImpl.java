@@ -44,6 +44,8 @@ public class FrontServiceImpl implements FrontService{
             Map<String, Object> root = new HashMap<String, Object>();
             root.put("model", MyUtil.a_b2AB(table));
             root.put("fields", Maps.getFields(table));
+            root.put("pk", Maps.getPK(table));
+            root.put("pkField", MyUtil.a_b2aB(Maps.getPK(table)) );
             cs.write2File(root, "Jsp.ftl", new File(path + File.separator + MyUtil.a_b2aB(table) + ".jsp"));
         }
     }
@@ -54,6 +56,8 @@ public class FrontServiceImpl implements FrontService{
     	Map<String, Object> root = new HashMap<String, Object>();
         root.put("model", MyUtil.a_b2AB(table));
         root.put("fields", Maps.getFields(table));
+        root.put("pk", Maps.getPK(table));
+        root.put("pkField", MyUtil.a_b2aB(Maps.getPK(table)) );
         cs.write2File(root, "Jsp.ftl", new File(path + File.separator + MyUtil.a_b2aB(table) + ".html"));
     }
 }
