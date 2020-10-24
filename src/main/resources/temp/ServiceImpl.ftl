@@ -61,7 +61,7 @@ public class ${model}ServiceImpl implements ${model}Service {
     public Object edit(ParamObject<${model}> paramObject ) throws Exception{
     	BeanUtil.buildEntity(${model}.class, paramObject);
     	${model} entity = paramObject.getEntity();
-    	${model?uncap_first}Dao.update(entity);
+    	${model?uncap_first}Dao.updateByPrimaryKey(entity);
     	paramObject.setMsg(  "保存成功");
         return entity;
     }
@@ -93,7 +93,7 @@ public class ${model}ServiceImpl implements ${model}Service {
     @Override
     @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
     public int update(${model} ${model?uncap_first}){
-        return ${model?uncap_first}Dao.update(${model?uncap_first});
+        return ${model?uncap_first}Dao.updateByPrimaryKey(${model?uncap_first});
     }
 
     @Override
