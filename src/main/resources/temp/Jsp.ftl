@@ -259,6 +259,36 @@
 		initTable();
 		//初始化table↑
 		
+		window.init = function(){
+			//查询所有带code的select
+			var codeSelectArr = $('select[code]');
+			var arrstr = "";
+			codeSelectArr.each(function(){
+				arrstr +=$(this).attr('code') + ",";
+		    });
+			if(arrstr != ''){
+				arrstr = arrstr.substring(0,arrstr.length - 1);
+				 pro.callServer("sysCodeService", "getAllCode",{code : arrstr} , function(res) {
+						if (res.data.state == "1") {
+							var data = res.data.data;
+							codeSelectArr.each(function(){
+								for(var i in data){
+									if($(this).attr('code') == i){
+										for(var j in data[i]){
+											$(this).append('<option value="'+ data[i][j].codeVal +'">'+ data[i][j].code +'</option>');
+										}
+										
+									}
+								}
+						    });
+							form.render();
+						} else {
+							
+						}
+				}); 
+			}
+		}
+		
 		function initTable(params){
 			//console.log(params);
 			 if(params == undefined  || params == null){
@@ -267,7 +297,9 @@
 			 }
 			 var loadindex = layer.load(loadingtype);
 			pro.callServer("queryService", "queryById", params, function(res) {
+			
 				layer.close(loadindex);
+				init();
 				//layer.msg(res.data.msg);
 				if (res.data.state == "1") {
 					//console.log(res);
