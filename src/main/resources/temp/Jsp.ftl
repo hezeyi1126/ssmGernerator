@@ -341,6 +341,7 @@
 				toolbar : '#toolbarDemo',
 				title : '用户数据表',
 				totalRow : true,
+				width : $('body').width() - $('body').width()*5/100,
 				limit: res.data.data.data.length,
 				cols : [ res.data.data.header],
 				data : res.data.data.data
