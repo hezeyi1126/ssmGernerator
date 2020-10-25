@@ -36,10 +36,6 @@
 									<#elseif f.frontType=="select">
 										<div class="layui-input-inline layui-show-xs-block">
 											<select name="${f.field}">
-												<option>用户状态</option>
-												<option>支付宝</option>
-												<option>微信</option>
-												<option>货到付款</option>
 											</select>
 										</div>
 									<#elseif f.frontType=="date">
