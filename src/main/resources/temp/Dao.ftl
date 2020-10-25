@@ -14,13 +14,13 @@ public interface ${model}Dao extends Mapper<${model}>{
 
    int insert(${model} ${model?uncap_first});
 
-  //  int delete(${model} ${model?uncap_first});
+    int delete(${model} ${model?uncap_first});
 
     int deleteByIds(@Param("ids") String[] ids);
 
-   // int update(${model} ${model?uncap_first});
+    int update(${model} ${model?uncap_first});
 
     ${model} getById(@Param("id") String id);
 
-   // List<${model}> list(${model} ${model?uncap_first});
+    List<${model}> list(${model} ${model?uncap_first});
 }
