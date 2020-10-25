@@ -136,10 +136,6 @@
 										lay-verify="required"
 									</#if>
 									>
-										<option value="2">用户状态</option>
-										<option value="3">支付宝</option>
-										<option value="4">微信</option>
-										<option value="5">货到付款</option>
 									</select>
 								</div> 
 							</div> 
