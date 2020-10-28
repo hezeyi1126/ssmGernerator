@@ -342,7 +342,7 @@
 				title : '用户数据表',
 				totalRow : true,
 				width : $('body').width() - $('body').width()*5/100,
-				limit: res.data.length,
+				limit:  res.data.data.length,
 				cols : [ res.data.header],
 				data : res.data.data
 			});
