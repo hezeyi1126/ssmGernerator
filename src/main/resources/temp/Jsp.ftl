@@ -234,7 +234,7 @@
 		//监听提交
 		form.on('submit(subform)', function(data) {
 			 var loadindex = layer.load(loadingtype);
-			pro.callServer(service, cmd, field, function(res) {
+			pro.callServer(service, cmd, data.field, function(res) {
 				layer.close(loadindex);
 				layer.msg(res.msg);
 				if (res.state == "1") {
@@ -300,7 +300,7 @@
 				 	// 分页样式
 					laypage.render({
 						elem : 'lafite_pages',
-						count : res.count,
+						count : res.data.count,
 						layout: ['count', 'prev', 'page', 'next', 'limit'],
 						theme : '#D91715',
 						jump : function(obj) {
@@ -342,9 +342,9 @@
 				title : '用户数据表',
 				totalRow : true,
 				width : $('body').width() - $('body').width()*5/100,
-				limit: res.length,
-				cols : [ res.header],
-				data : res.data
+				limit: res.data.length,
+				cols : [ res.data.header],
+				data : res.data.data
 			});
 		}
 
