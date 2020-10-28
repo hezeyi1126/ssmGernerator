@@ -357,7 +357,7 @@
 				break;
 			case 'delSelected':
 				var data = checkStatus.data;
-				if(length == 0){
+				if(data.length == 0){
 					layer.msg('请选中需要删除的条目');
 					break;
 				}
