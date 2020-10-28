@@ -234,10 +234,10 @@
 		//监听提交
 		form.on('submit(subform)', function(data) {
 			 var loadindex = layer.load(loadingtype);
-			pro.callServer(service, cmd, data.field, function(res) {
+			pro.callServer(service, cmd, field, function(res) {
 				layer.close(loadindex);
-				layer.msg(res.data.msg);
-				if (res.data.state == "1") {
+				layer.msg(res.msg);
+				if (res.state == "1") {
 					search();
 					back();
 				} else {
@@ -261,8 +261,8 @@
 			if(arrstr != ''){
 				arrstr = arrstr.substring(0,arrstr.length - 1);
 				 pro.callServer("sysCodeService", "getAllCode",{code : arrstr} , function(res) {
-						if (res.data.state == "1") {
-							var data = res.data.data;
+						if (res.state == "1") {
+							var data = res.data;
 							codeSelectArr.each(function(){
 								for(var i in data){
 									if($(this).attr('code') == i){
@@ -292,15 +292,15 @@
 			
 				layer.close(loadindex);
 				init();
-				//layer.msg(res.data.msg);
-				if (res.data.state == "1") {
+				//layer.msg(res.msg);
+				if (res.state == "1") {
 					//console.log(res);
 					loadTable(res);
 					var counts = 0;
 				 	// 分页样式
 					laypage.render({
 						elem : 'lafite_pages',
-						count : res.data.data.count,
+						count : res.count,
 						layout: ['count', 'prev', 'page', 'next', 'limit'],
 						theme : '#D91715',
 						jump : function(obj) {
@@ -315,8 +315,8 @@
 								pro.callServer("queryService", "queryById", params,function(res){
 									//console.log(res)
 									layer.close(loadindex);
-									//layer.msg(res.data.msg);
-									if (res.data.state == "1") {
+									//layer.msg(res.msg);
+									if (res.state == "1") {
 										loadTable(res);
 									}
 								});
@@ -342,9 +342,9 @@
 				title : '用户数据表',
 				totalRow : true,
 				width : $('body').width() - $('body').width()*5/100,
-				limit: res.data.data.data.length,
-				cols : [ res.data.data.header],
-				data : res.data.data.data
+				limit: res.length,
+				cols : [ res.header],
+				data : res.data
 			});
 		}
 
@@ -357,7 +357,7 @@
 				break;
 			case 'delSelected':
 				var data = checkStatus.data;
-				if(data.length == 0){
+				if(length == 0){
 					layer.msg('请选中需要删除的条目');
 					break;
 				}
@@ -403,12 +403,12 @@
 		pro.callServer(service, "getBId",{${pkField} : id},function(res){
 			layer.close(loadindex);
 			
-			if(res.data.state == '1'){
+			if(res.state == '1'){
 				console.log(res);
 				//清除页面的值
 				 clearForm();
 				//绑定值
-				fillForm(res.data.data)
+				fillForm(res.data)
 				//进入编辑页面
 				goedit();
 			}
@@ -423,8 +423,8 @@
 			 var loadindex = layer.load(loadingtype);
 			pro.callServer(service, "del",{${pkField} : id},function(res){
 				layer.close(loadindex);
-				layer.msg(res.data.msg);
-				if(res.data.state == '1'){
+				layer.msg(res.msg);
+				if(res.state == '1'){
 					//刷新页面
 					back();
 					search();
@@ -439,7 +439,7 @@
 	*/
 	function delSelected(data){
 		var ids = "";
-		for(var i = 0 ;i < data.length;i++){
+		for(var i = 0 ;i < length;i++){
 			ids += data[i].${pkField} + ",";
 		}
 		ids = ids.substring(0 , ids.length - 1);
@@ -451,8 +451,8 @@
 			 var loadindex = layer.load(loadingtype);
 			 pro.callServer(service, "delSelected",{ids : ids},function(res){
 					layer.close(loadindex);
-					layer.msg(res.data.msg);
-					if(res.data.state == '1'){
+					layer.msg(res.msg);
+					if(res.state == '1'){
 						//刷新页面
 						back();
 						search();
