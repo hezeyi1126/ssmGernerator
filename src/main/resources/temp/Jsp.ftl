@@ -439,7 +439,7 @@
 	*/
 	function delSelected(data){
 		var ids = "";
-		for(var i = 0 ;i < length;i++){
+		for(var i = 0 ;i < data.length;i++){
 			ids += data[i].${pkField} + ",";
 		}
 		ids = ids.substring(0 , ids.length - 1);
