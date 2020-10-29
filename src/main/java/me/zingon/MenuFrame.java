@@ -422,8 +422,8 @@ public class MenuFrame extends JFrame {
 	private Component addEast() {
 		JPanel pan1 = new JPanel();
 //		pan1.setPreferredSize(new Dimension(200, 0));
-		JScrollPane scrollPane = new JScrollPane();
-		scrollPane.setPreferredSize(new Dimension(200,200));
+		
+	
 		//查询数据表
 		if(App.driver.equals("com.mysql.jdbc.Driver")) {
 			tableDao.loadTables();
@@ -431,7 +431,8 @@ public class MenuFrame extends JFrame {
 
 		String[] tables =Maps.getTables().toArray(new String[Maps.getTables().size()]);
 		JList list = new JList(tables);
-
+		JScrollPane scrollPane = new JScrollPane(list);
+		scrollPane.setPreferredSize(new Dimension(200,600));
 		list.addListSelectionListener(new ListSelectionListener(){
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
@@ -444,10 +445,8 @@ public class MenuFrame extends JFrame {
 			}
 		});
 
-		//		scrollPane.setViewportView(list);
-		//		scrollPane.add(list);
 
-		pan1.add(list);
+		pan1.add(scrollPane);
 		return pan1;
 	}
 
