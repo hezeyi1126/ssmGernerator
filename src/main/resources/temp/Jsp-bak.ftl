@@ -266,9 +266,8 @@
 							codeSelectArr.each(function(){
 								for(var i in data){
 									if($(this).attr('code') == i){
-										 $(this).append('<option value>请选择</option>');
 										for(var j in data[i]){
-											$(this).append('<option value="'+  data[i][j].codeValue + '">' + data[i][j].codeName+'</option>');
+											$(this).append('<option value="'+ data[i][j].codeVal +'">'+ data[i][j].code +'</option>');
 										}
 										
 									}
@@ -281,7 +280,6 @@
 				}); 
 			}
 		}
-		init();
 		
 		function initTable(params){
 			//console.log(params);
@@ -293,7 +291,7 @@
 			pro.callServer("queryService", "queryById", params, function(res) {
 			
 				layer.close(loadindex);
-
+				init();
 				//layer.msg(res.msg);
 				if (res.state == "1") {
 					//console.log(res);
