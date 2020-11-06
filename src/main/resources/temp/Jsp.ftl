@@ -304,7 +304,7 @@
 						elem : 'lafite_pages',
 						count : res.data.count,
 						layout: ['count', 'prev', 'page', 'next', 'limit'],
-						theme : '#D91715',
+					//	theme : '#D91715',
 						jump : function(obj) {
 							counts++;
 							//模拟渲染
