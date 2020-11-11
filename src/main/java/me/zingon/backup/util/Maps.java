@@ -32,6 +32,7 @@ public class Maps {
         for(Map.Entry<String,List<Field>> e:set){
             tables.add(e.getKey());
         }
+        Collections.sort(tables);
         return tables;
     }
 
