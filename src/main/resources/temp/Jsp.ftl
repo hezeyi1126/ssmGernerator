@@ -29,24 +29,18 @@
 							<#list fields as f>
 								<#if f.issearch=="YES">
 									<#if f.frontType=="input">
-										<div class="layui-inline">
-											<label class="layui-form-label">${f.comment}：</label>
 										 <div class="layui-input-inline layui-show-xs-block">
 											<input type="text" name="${f.field}" placeholder="${f.comment}"
 												autocomplete="off" class="layui-input">
 									   	  </div>
-										</div>
 									<#elseif f.frontType=="select">
-										<div class="layui-inline">
-											<label class="layui-form-label">${f.comment}：</label>
-											<div class="layui-input-inline layui-show-xs-block">
-												<select name="${f.field}">
-												</select>
-											</div>
+										<div class="layui-input-inline layui-show-xs-block">
+											<select name="${f.field}">
+											</select>
 										</div>
 									<#elseif f.frontType=="date">
-										<div class="layui-inline">
-											<label class="layui-form-label">${f.comment}：</label>
+										<div class="layui-input-inline layui-show-xs-block">
+											<label class="layui-form-label">${f.comment}</label>
 											<div class="layui-input-inline">
 												<input type="text" class="layui-input" 
 												inputtype="date" name="${f.field}" placeholder="yyyy-MM-dd">
@@ -59,29 +53,24 @@
 							</#list>
 								
 								<div class="layui-input-inline lafite_search layui-show-xs-block">
-
+									<button type="button" class="layui-btn  " onclick="search()" >
+											
+											查询</button>
 								</div>
 						</div>
 					</form>
 					   <!-- 查询面板 👆-->
 
-					<div class="layui-card-body ">
-						<button type="button" class="layui-btn  " onclick="search()" >
-
-							查询</button>
-						<button class="layui-btn lafite_main_color " onclick="add()">新增</button>
-						<button class="layui-btn lafite_main_color" onclick="delSelected()">删除选中</button>
-					</div>
-
 					<div class="layui-card-body">
 
 						<table class="layui-table" id="test" lay-filter="test"></table>
-<#--						<script type="text/html" id="toolbarDemo">-->
-<#--                                <div class="layui-btn-container">-->
-<#--                                    -->
-<#--                                   -->
-<#--                                  </div>-->
-<#--	                    </script>-->
+						<script type="text/html" id="toolbarDemo">
+                                <div class="layui-btn-container">
+                                     <button class="layui-btn lafite_main_color " lay-event="add">新增</button>
+                                   <button class="layui-btn lafite_main_color" lay-event="delSelected">删除选中</button>
+                                   
+                                  </div>
+	                    </script>
 
 						<script type="text/html" id="editpane">
 									<i class="layui-icon layui-icon-edit" onclick="edit('{{d.${pkField}}}')"  style="font-size: 18px; color: #1E9FFF;"></i>  
@@ -198,7 +187,7 @@
 	var queryid = "${model?uncap_first}Query"
 	var cmd = "add";//默认为添加 可以为edit
 	$(document).ready(function() {
-
+		initSelect();
 	});
 
 	layui.use([ 'form', 'table', 'laypage','laydate' ], function() {
@@ -262,8 +251,6 @@
 		initTable();
 		//初始化table↑
 		
-
-		
 		function initTable(params){
 			//console.log(params);
 			 if(params == undefined  || params == null){
@@ -274,7 +261,6 @@
 			pro.callServer("queryService", "queryById", params, function(res) {
 			
 				layer.close(loadindex);
-
 				//layer.msg(res.msg);
 				if (res.state == "1") {
 					//console.log(res);
@@ -285,7 +271,7 @@
 						elem : 'lafite_pages',
 						count : res.data.count,
 						layout: ['count', 'prev', 'page', 'next', 'limit'],
-					//	theme : '#D91715',
+						theme : '#D91715',
 						jump : function(obj) {
 							counts++;
 							//模拟渲染
@@ -319,11 +305,11 @@
 		//渲染table
 		function loadTable(res){
 			table.render({
-				elem : '#test',
-			//	toolbar : '#toolbarDemo',
+				elem : '#test'
+				,
+				toolbar : '#toolbarDemo',
 				title : '用户数据表',
-			//	totalRow : true,
-				height : 'full-300',
+				totalRow : true,
 				width : $('body').width() - $('body').width()*5/100,
 				limit:  res.data.data.length,
 				cols : [ res.data.header],
@@ -331,54 +317,27 @@
 			});
 		}
 
-		window.delSelected = function(){
-			var checkStatus  = table.checkStatus('test');
-			var data = checkStatus.data;
-			if(data.length == 0){
-				layer.msg('请选中需要删除的条目');
-				return;
-			}
-			var ids = "";
-			for(var i = 0 ;i < data.length;i++){
-				ids += data[i].${pkField} + ",";
-			}
-			ids = ids.substring(0 , ids.length - 1);
-			layer.confirm('是否确认删除当前项目？', {
-				title : "项目删除"
-			}, function(index) {
-				console.log(index)
-				//发异步删除数据
-				var loadindex = layer.load(loadingtype);
-				pro.callServer(service, "delSelected",{ids : ids},function(res){
-					layer.close(loadindex);
-					layer.msg(res.msg);
-					if(res.state == '1'){
-						//刷新页面
-						back();
-						search();
-					}
-				});
-
-
-			});
-		}
-
 		//工具栏事件
-		// table.on('toolbar(test)', function(obj) {
-		// 	var checkStatus = table.checkStatus(obj.config.id);
-		// 	switch (obj.event) {
-		// 	case 'add':
-		// 		add();
-		// 		break;
-		// 	case 'delSelected':
-		//
-		// 		break;
-		// 	case 'isAll':
-		// 		layer.msg(checkStatus.isAll ? '全选' : '未全选')
-		// 		break;
-		// 	}
-		// 	;
-		// });
+		table.on('toolbar(test)', function(obj) {
+			var checkStatus = table.checkStatus(obj.config.id);
+			switch (obj.event) {
+			case 'add':
+				add();
+				break;
+			case 'delSelected':
+				var data = checkStatus.data;
+				if(data.length == 0){
+					layer.msg('请选中需要删除的条目');
+					break;
+				}
+				delSelected(data);
+				break;
+			case 'isAll':
+				layer.msg(checkStatus.isAll ? '全选' : '未全选')
+				break;
+			}
+			;
+		});
 	});
 /**-------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 	/*添加用户*/
@@ -444,7 +403,35 @@
 		});
 	}
 	
-
+	/**
+	删除选中条目
+	*/
+	function delSelected(data){
+		var ids = "";
+		for(var i = 0 ;i < data.length;i++){
+			ids += data[i].${pkField} + ",";
+		}
+		ids = ids.substring(0 , ids.length - 1);
+		layer.confirm('是否确认删除当前项目？', {
+			title : "项目删除"
+		}, function(index) {
+			console.log(index)
+			//发异步删除数据
+			 var loadindex = layer.load(loadingtype);
+			 pro.callServer(service, "delSelected",{ids : ids},function(res){
+					layer.close(loadindex);
+					layer.msg(res.msg);
+					if(res.state == '1'){
+						//刷新页面
+						back();
+						search();
+					}
+				});
+			 
+		
+		});
+		
+	}
 
 </script>
 
