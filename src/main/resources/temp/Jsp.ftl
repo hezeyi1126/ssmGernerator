@@ -94,7 +94,7 @@
 						<input type="hidden" name="${f.field}"  />
 					<#elseif f.frontType=="input">
 						<div class="layui-form-item">
-							<label for="L_email" class="layui-form-label"> 
+							<label  class="layui-form-label"> 
 								<#if f.isnull=="NO">
 										<span class="x-red">*</span>
 									</#if>
@@ -271,7 +271,7 @@
 						elem : 'lafite_pages',
 						count : res.data.count,
 						layout: ['count', 'prev', 'page', 'next', 'limit'],
-						theme : '#D91715',
+						theme : theme,
 						jump : function(obj) {
 							counts++;
 							//模拟渲染
@@ -310,7 +310,8 @@
 				toolbar : '#toolbarDemo',
 				title : '用户数据表',
 				totalRow : true,
-				width : $('body').width() - $('body').width()*5/100,
+				even : true,
+			//	width : $('body').width() - $('body').width()*5/100,
 				limit:  res.data.data.length,
 				cols : [ res.data.header],
 				data : res.data.data

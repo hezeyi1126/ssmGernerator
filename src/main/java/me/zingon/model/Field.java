@@ -51,7 +51,7 @@ public class Field {
             return "String";
         if(type.contains("char"))
             return "String";
-        if(type.contains("longtext"))
+        if(type.contains("text"))
         	return "String";
         if(type.contains("date")||type.contains("time"))
             return "Date";
