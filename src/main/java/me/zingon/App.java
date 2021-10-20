@@ -72,7 +72,7 @@ public class App  {
 	private static JTextField jpwd = new JTextField(Config.get("db.password"));     
 	
 	
-	private static JFrame frame = null;
+	public static JFrame frame = null;
 	
 	
 	static {

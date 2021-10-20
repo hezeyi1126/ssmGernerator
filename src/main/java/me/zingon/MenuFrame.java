@@ -153,6 +153,10 @@ public class MenuFrame extends JFrame {
 		add(addNorth() , BorderLayout.NORTH);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
+
+	private void closeFrame(){
+		this.dispose();
+	}
 	
 	/**
 	 * 开始生成
@@ -338,9 +342,11 @@ public class MenuFrame extends JFrame {
 		JPanel pan1 = new JPanel();
 		JButton btn = new JButton("生成");
 		JButton btn2 = new JButton("查看");
+		JButton btn3 = new JButton("返回");
 		pan1.setLayout(new FlowLayout());
 		pan1.add(btn);
 		pan1.add(btn2);
+		pan1.add(btn3);
 
 		btn.addActionListener(new ActionListener() {//点击
 
@@ -406,6 +412,15 @@ public class MenuFrame extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				Vector<Vector> dataVector = datamodel.getDataVector();
 				System.out.println(MyUtil.getPath());
+			}
+		});
+
+		btn3.addActionListener(new ActionListener() {//点击
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				closeFrame();
+				App.frame.setVisible(true);
 			}
 		});
 
